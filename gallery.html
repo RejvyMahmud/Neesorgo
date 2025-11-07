@@ -1,0 +1,1519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery | NEESORGO - JTEC Cine Photography Society</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #FF6B35;
+            --secondary: #FFD166;
+            --dark: #0A0A0A;
+            --dark-gray: #1A1A1A;
+            --light: #F5F5F5;
+            --accent: #EF476F;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background: var(--primary);
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 14px;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: var(--dark);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--light);
+            color: var(--light);
+        }
+
+        .btn-outline:hover {
+            background: var(--light);
+            color: var(--dark);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 3rem;
+            display: inline-block;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+        }
+
+        .section-title p {
+            max-width: 600px;
+            margin: 0 auto;
+            color: #aaa;
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            font-size: 1.8rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--light);
+        }
+
+        /* Gallery Hero Section */
+        .gallery-hero {
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .gallery-hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(10, 10, 10, 0.8), rgba(10, 10, 10, 0.9)), 
+                        url('https://images.unsplash.com/photo-1554048612-b6a482bc67e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+        }
+
+        .gallery-hero-content {
+            max-width: 800px;
+            animation: fadeInUp 1s ease-out;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .gallery-hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .gallery-hero h1 span {
+            color: var(--primary);
+        }
+
+        .gallery-hero p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            color: #ccc;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Gallery Categories */
+        .gallery-categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 3rem 0 2rem;
+            padding: 0 20px;
+        }
+
+        .category-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            padding: 0.7rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .category-btn.active, .category-btn:hover {
+            background: var(--primary);
+            color: var(--dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.4);
+        }
+
+        /* Gallery Grid */
+        .gallery-main {
+            background: var(--dark-gray);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 2rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: var(--transition);
+            aspect-ratio: 4/3;
+            background: var(--dark);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(255, 107, 53, 0.3);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+            display: block;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px 25px;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+            color: white;
+            transform: translateY(100%);
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-overlay h3 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            color: var(--light);
+        }
+
+        .gallery-overlay p {
+            color: #ccc;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .gallery-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: #aaa;
+        }
+
+        .gallery-photographer {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .gallery-photographer i {
+            color: var(--primary);
+        }
+
+        /* Featured Collections */
+        .featured-collections {
+            background: var(--dark);
+        }
+
+        .collections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .collection-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .collection-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 15px 30px rgba(255, 107, 53, 0.2);
+        }
+
+        .collection-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .collection-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .collection-card:hover .collection-image img {
+            transform: scale(1.1);
+        }
+
+        .collection-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.8), rgba(255, 209, 102, 0.6));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .collection-card:hover .collection-overlay {
+            opacity: 1;
+        }
+
+        .collection-overlay .btn {
+            transform: translateY(20px);
+            transition: var(--transition);
+        }
+
+        .collection-card:hover .collection-overlay .btn {
+            transform: translateY(0);
+        }
+
+        .collection-content {
+            padding: 25px;
+        }
+
+        .collection-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: var(--light);
+        }
+
+        .collection-content p {
+            color: #aaa;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .collection-stats {
+            display: flex;
+            gap: 20px;
+            color: #777;
+            font-size: 0.85rem;
+        }
+
+        .collection-stat {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .collection-stat i {
+            color: var(--primary);
+        }
+
+        /* Stats Section */
+        .gallery-stats {
+            background: var(--dark-gray);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 107, 53, 0.1);
+        }
+
+        .stat-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .stat-text {
+            color: #aaa;
+            font-size: 1.1rem;
+        }
+
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, var(--dark), var(--dark-gray));
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            color: #ccc;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+            background: var(--dark);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox-image {
+            width: 100%;
+            height: auto;
+            max-height: 70vh;
+            object-fit: contain;
+            display: block;
+        }
+
+        .lightbox-info {
+            padding: 25px;
+            background: var(--dark-gray);
+        }
+
+        .lightbox-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--light);
+        }
+
+        .lightbox-info p {
+            color: #aaa;
+            margin-bottom: 15px;
+        }
+
+        .lightbox-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 2rem;
+            color: var(--light);
+            cursor: pointer;
+            z-index: 2001;
+            background: rgba(0, 0, 0, 0.7);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .lightbox-close:hover {
+            background: var(--primary);
+            transform: scale(1.1);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: var(--light);
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1.5rem;
+        }
+
+        .lightbox-nav:hover {
+            background: var(--primary);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .lightbox-prev {
+            left: 30px;
+        }
+
+        .lightbox-next {
+            right: 30px;
+        }
+
+        /* Footer */
+        footer {
+            background: #000;
+            padding: 60px 0 30px;
+            text-align: center;
+        }
+
+        .footer-content {
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .footer-links li {
+            margin: 0 15px;
+        }
+
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .copyright {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            color: var(--light);
+            font-size: 1.2rem;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        /* Scroll to Top Button */
+        .scroll-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--primary);
+            color: var(--dark);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.5);
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: var(--transition);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Loading Animation */
+        .gallery-item.loading {
+            background: linear-gradient(90deg, #1a1a1a 25%, #2a2a2a 50%, #1a1a1a 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% {
+                background-position: 200% 0;
+            }
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1200px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+        }
+
+        @media (max-width: 992px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .collections-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: var(--dark);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 10px 0;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .gallery-hero h1 {
+                font-size: 3rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.5rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                text-align: center;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-categories {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .category-btn {
+                width: 80%;
+            }
+            
+            .lightbox-nav {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+            
+            .lightbox-prev {
+                left: 15px;
+            }
+            
+            .lightbox-next {
+                right: 15px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .gallery-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .cta h2 {
+                font-size: 2.5rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .collections-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container header-container">
+            <a href="index.html" class="logo"><i class="fas fa-camera-retro"></i> NEESORGO</a>
+            <ul class="nav-links">
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="gallery.html" class="active">Gallery</a></li>
+                <li><a href="members.html">Team</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="mobile-menu"><i class="fas fa-bars"></i></div>
+        </div>
+    </header>
+
+    <!-- Gallery Hero Section -->
+    <section class="gallery-hero">
+        <div class="gallery-hero-bg"></div>
+        <div class="container">
+            <div class="gallery-hero-content">
+                <h1>Our <span>Gallery</span> 🖼️</h1>
+                <p>Explore the visual journey of NEESORGO through our collection of stunning photographs, cinematic shots, and creative masterpieces.</p>
+                <a href="#gallery-grid" class="btn">View Gallery</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Categories -->
+    <div class="container">
+        <div class="gallery-categories">
+            <button class="category-btn active" data-category="all">All Photos</button>
+            <button class="category-btn" data-category="portrait">Portrait</button>
+            <button class="category-btn" data-category="landscape">Landscape</button>
+            <button class="category-btn" data-category="street">Street Photography</button>
+            <button class="category-btn" data-category="wildlife">Wildlife</button>
+            <button class="category-btn" data-category="cinematic">Cinematic</button>
+            <button class="category-btn" data-category="events">Events</button>
+        </div>
+    </div>
+
+    <!-- Gallery Grid -->
+    <section class="gallery-main" id="gallery-grid">
+        <div class="container">
+            <div class="gallery-grid" id="galleryContainer">
+                <!-- Portrait Photography -->
+                <div class="gallery-item fade-in" data-category="portrait" onclick="openLightbox(0)">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Portrait Photography">
+                    <div class="gallery-overlay">
+                        <h3>Golden Hour Portrait</h3>
+                        <p>A stunning portrait captured during the golden hour with perfect natural lighting.</p>
+                        <div class="gallery-meta">
+                            <div class="gallery-photographer">
+                                <i class="fas fa-camera"></i>
+                                <span>Nafisa Zarin</span>
+                            </div>
+                            <div class="gallery-date">March 2024</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Landscape Photography -->
+                <div class="gallery-item fade-in" data-category="landscape" onclick="openLightbox(1)">
+                    <img src="https://images.unsplash.com/photo-1501854140801-50d01698950b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Landscape Photography">
+                    <div class="gallery-overlay">
+                        <h3>Mountain Majesty</h3>
+                        <p>Breathtaking landscape of mountains during sunrise with misty valleys.</p>
+                        <div class="gallery-meta">
+                            <div class="gallery-photographer">
+                                <i class="fas fa-camera"></i>
+                                <span>Rakibul Islam</span>
+                            </div>
+                            <div class="gallery-date">January 2024</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Street Photography -->
+                <div class="gallery-item fade-in" data-category="street" onclick="openLightbox(2)">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Street Photography">
+                    <div class="gallery-overlay">
+                        <h3>Urban Stories</h3>
+                        <p>Capturing the essence of city life and human moments in urban environments.</p>
+                        <div class="gallery-meta">
+                            <div class="gallery-photographer">
+                                <i class="fas fa-camera"></i>
+                                <span>Tasnim Ahmed</span>
+                            </div>
+                            <div class="gallery-date">February 2024</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wildlife Photography -->
+                <div class="gallery-item fade-in" data-category="wildlife" onclick="openLightbox(3)">
+                    <img src="https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Wildlife Photography">
+                    <div class="gallery-overlay">
+                        <h3>Wild Beauty</h3>
+                        <p>Close-up wildlife photography showcasing the beauty of nature's creatures.</p>
+                        <div class="gallery-meta">
+                            <div class="gallery-photographer">
+                                <i class="fas fa-camera"></i>
+                                <span>Shahriar Khan</span>
+                            </div>
+                            <div class="gallery-date">December 2023</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cinematic Photography -->
+                <div class="gallery-item fade-in" data-category="cinematic" onclick="openLightbox(4)">
+                    <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Cinematic Photography">
+                    <div class="gallery-overlay">
+                        <h3>Cinematic Dreams</h3>
+                        <p>Movie-like composition with dramatic lighting and storytelling elements.</p>
+                        <div class="gallery-meta">
+                            <div class="gallery-photographer">
+                                <i class="fas fa-camera"></i>
+                                <span>Farhana Akter</span>
+                            </div>
+                            <div class="gallery-date">November 2023</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Events Photography -->
+                <div class="gallery-item fade-in" data-category="events" onclick="openLightbox(5)">
+                    <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Events Photography">
+                    <div class="gallery-overlay">
+                        <h3>Campus Festival</h3>
+                        <p>Vibrant moments from our annual college cultural festival celebration.</p>
+                        <div class="gallery-meta">
+                            <div class="gallery-photographer">
+                                <i class="fas fa-camera"></i>
+                                <span>Rahim Uddin</span>
+                            </div>
+                            <div class="gallery-date">October 2023</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Images -->
+                <div class="gallery-item fade-in" data-category="portrait" onclick="openLightbox(6)">
+                    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Creative Portrait">
+                    <div class="gallery-overlay">
+                        <h3>Creative Vision</h3>
+                        <p>Experimental portrait with unique composition and creative editing.</p>
+                        <div class="gallery-meta">
+                            <div class="gallery-photographer">
+                                <i class="fas fa-camera"></i>
+                                <span>Sabrina Chowdhury</span>
+                            </div>
+                            <div class="gallery-date">September 2023</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item fade-in" data-category="landscape" onclick="openLightbox(7)">
+                    <img src="https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Nature Landscape">
+                    <div class="gallery-overlay">
+                        <h3>Forest Serenity</h3>
+                        <p>Peaceful landscape of a misty forest with sunlight filtering through trees.</p>
+                        <div class="gallery-meta">
+                            <div class="gallery-photographer">
+                                <i class="fas fa-camera"></i>
+                                <span>Alamgir Oishe</span>
+                            </div>
+                            <div class="gallery-date">August 2023</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Collections -->
+    <section class="featured-collections">
+        <div class="container">
+            <div class="section-title">
+                <h2>Featured Collections</h2>
+                <p>Curated collections of our best photographic work</p>
+            </div>
+            <div class="collections-grid">
+                <div class="collection-card fade-in">
+                    <div class="collection-image">
+                        <img src="https://images.unsplash.com/photo-1554080353-a576cf803bda?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Black & White Collection">
+                        <div class="collection-overlay">
+                            <a href="#" class="btn">View Collection</a>
+                        </div>
+                    </div>
+                    <div class="collection-content">
+                        <h3>Monochrome Magic</h3>
+                        <p>A stunning collection of black and white photography showcasing contrast, texture, and emotion.</p>
+                        <div class="collection-stats">
+                            <div class="collection-stat">
+                                <i class="fas fa-image"></i>
+                                <span>24 Photos</span>
+                            </div>
+                            <div class="collection-stat">
+                                <i class="fas fa-eye"></i>
+                                <span>1.2K Views</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="collection-card fade-in">
+                    <div class="collection-image">
+                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Urban Exploration">
+                        <div class="collection-overlay">
+                            <a href="#" class="btn">View Collection</a>
+                        </div>
+                    </div>
+                    <div class="collection-content">
+                        <h3>Urban Exploration</h3>
+                        <p>Discover the hidden beauty of urban landscapes and architectural marvels.</p>
+                        <div class="collection-stats">
+                            <div class="collection-stat">
+                                <i class="fas fa-image"></i>
+                                <span>18 Photos</span>
+                            </div>
+                            <div class="collection-stat">
+                                <i class="fas fa-eye"></i>
+                                <span>956 Views</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="collection-card fade-in">
+                    <div class="collection-image">
+                        <img src="https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Nature's Wonders">
+                        <div class="collection-overlay">
+                            <a href="#" class="btn">View Collection</a>
+                        </div>
+                    </div>
+                    <div class="collection-content">
+                        <h3>Nature's Wonders</h3>
+                        <p>Breathtaking landscapes and wildlife photography from around Bangladesh.</p>
+                        <div class="collection-stats">
+                            <div class="collection-stat">
+                                <i class="fas fa-image"></i>
+                                <span>32 Photos</span>
+                            </div>
+                            <div class="collection-stat">
+                                <i class="fas fa-eye"></i>
+                                <span>2.1K Views</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Stats -->
+    <section class="gallery-stats">
+        <div class="container">
+            <div class="section-title">
+                <h2>Gallery by Numbers</h2>
+                <p>Our photographic journey in impressive statistics</p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card fade-in">
+                    <div class="stat-icon">
+                        <i class="fas fa-images"></i>
+                    </div>
+                    <div class="stat-number">5000+</div>
+                    <div class="stat-text">Photos in Archive</div>
+                </div>
+                <div class="stat-card fade-in">
+                    <div class="stat-icon">
+                        <i class="fas fa-user-friends"></i>
+                    </div>
+                    <div class="stat-number">40+</div>
+                    <div class="stat-text">Photographers</div>
+                </div>
+                <div class="stat-card fade-in">
+                    <div class="stat-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="stat-number">15+</div>
+                    <div class="stat-text">Awards Won</div>
+                </div>
+                <div class="stat-card fade-in">
+                    <div class="stat-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div class="stat-number">25+</div>
+                    <div class="stat-text">Exhibitions</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Showcase Your Work</h2>
+                <p>Want to feature your photography in our gallery? Join NEESORGO and become part of our creative community of visual storytellers.</p>
+                <div class="cta-buttons">
+                    <a href="contact.html" class="btn">Join Our Society</a>
+                    <a href="events.html" class="btn btn-secondary">Upcoming Workshops</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">NEESORGO</div>
+                <p>JTEC Cine Photography Society</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+                </div>
+                <ul class="footer-links">
+                    <li><a href="index.html#home">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="members.html">Team</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="copyright">
+                <p>© 2025 NEESORGO – JTEC Cine Photography Society<br>Made with 🎬 by the Creative Team</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+        <span class="lightbox-close" onclick="closeLightbox(event)">&times;</span>
+        <button class="lightbox-nav lightbox-prev" onclick="changeImage(-1, event)">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="lightbox-nav lightbox-next" onclick="changeImage(1, event)">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        <div class="lightbox-content" onclick="event.stopPropagation()">
+            <img class="lightbox-image" id="lightbox-img" src="" alt="">
+            <div class="lightbox-info">
+                <h3 id="lightbox-title">Image Title</h3>
+                <p id="lightbox-desc">Image description goes here</p>
+                <div class="lightbox-meta">
+                    <div class="gallery-photographer">
+                        <i class="fas fa-camera"></i>
+                        <span id="lightbox-photographer">Photographer Name</span>
+                    </div>
+                    <div class="gallery-date" id="lightbox-date">Date</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <div class="scroll-top" id="scrollTop">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <script>
+        // Gallery Data
+        const galleryItems = [
+            {
+                image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                title: "Golden Hour Portrait",
+                description: "A stunning portrait captured during the golden hour with perfect natural lighting and soft shadows that highlight the subject's features beautifully.",
+                photographer: "Nafisa Zarin",
+                date: "March 2024",
+                category: "portrait"
+            },
+            {
+                image: "https://images.unsplash.com/photo-1501854140801-50d01698950b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                title: "Mountain Majesty",
+                description: "Breathtaking landscape of mountains during sunrise with misty valleys and the first light touching the peaks, creating a magical atmosphere.",
+                photographer: "Rakibul Islam",
+                date: "January 2024",
+                category: "landscape"
+            },
+            {
+                image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                title: "Urban Stories",
+                description: "Capturing the essence of city life and human moments in urban environments, showcasing the beauty of everyday life in metropolitan areas.",
+                photographer: "Tasnim Ahmed",
+                date: "February 2024",
+                category: "street"
+            },
+            {
+                image: "https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                title: "Wild Beauty",
+                description: "Close-up wildlife photography showcasing the beauty of nature's creatures in their natural habitat with incredible detail and clarity.",
+                photographer: "Shahriar Khan",
+                date: "December 2023",
+                category: "wildlife"
+            },
+            {
+                image: "https://images.unsplash.com/photo-1485846234645-a62644f84728?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                title: "Cinematic Dreams",
+                description: "Movie-like composition with dramatic lighting and storytelling elements that transport viewers into a different world of visual narrative.",
+                photographer: "Farhana Akter",
+                date: "November 2023",
+                category: "cinematic"
+            },
+            {
+                image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                title: "Campus Festival",
+                description: "Vibrant moments from our annual college cultural festival celebration, capturing the energy, colors, and emotions of the event.",
+                photographer: "Rahim Uddin",
+                date: "October 2023",
+                category: "events"
+            },
+            {
+                image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                title: "Creative Vision",
+                description: "Experimental portrait with unique composition and creative editing techniques that push the boundaries of traditional photography.",
+                photographer: "Sabrina Chowdhury",
+                date: "September 2023",
+                category: "portrait"
+            },
+            {
+                image: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                title: "Forest Serenity",
+                description: "Peaceful landscape of a misty forest with sunlight filtering through trees, creating a serene and magical atmosphere of nature's beauty.",
+                photographer: "Alamgir Oishe",
+                date: "August 2023",
+                category: "landscape"
+            }
+        ];
+
+        let currentImageIndex = 0;
+
+        // Mobile Menu Toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Header Scroll Effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll to Top Button
+        const scrollTopBtn = document.getElementById('scrollTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+        
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Gallery Category Filtering
+        document.querySelectorAll('.category-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                document.querySelectorAll('.category-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                const category = button.getAttribute('data-category');
+                const items = document.querySelectorAll('.gallery-item');
+                
+                items.forEach(item => {
+                    if (category === 'all' || item.getAttribute('data-category') === category) {
+                        item.style.display = 'block';
+                        // Add animation
+                        item.style.animation = 'none';
+                        setTimeout(() => {
+                            item.style.opacity = '0';
+                            item.style.transform = 'translateY(20px)';
+                            item.style.animation = 'fadeIn 0.6s forwards';
+                        }, 10);
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Lightbox Functions
+        function openLightbox(index) {
+            currentImageIndex = index;
+            const item = galleryItems[index];
+            document.getElementById('lightbox-img').src = item.image;
+            document.getElementById('lightbox-title').textContent = item.title;
+            document.getElementById('lightbox-desc').textContent = item.description;
+            document.getElementById('lightbox-photographer').textContent = item.photographer;
+            document.getElementById('lightbox-date').textContent = item.date;
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox(event) {
+            if (event.target.id === 'lightbox' || event.target.classList.contains('lightbox-close')) {
+                document.getElementById('lightbox').classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        function changeImage(direction, event) {
+            event.stopPropagation();
+            currentImageIndex += direction;
+            
+            if (currentImageIndex < 0) {
+                currentImageIndex = galleryItems.length - 1;
+            } else if (currentImageIndex >= galleryItems.length) {
+                currentImageIndex = 0;
+            }
+            
+            const item = galleryItems[currentImageIndex];
+            document.getElementById('lightbox-img').src = item.image;
+            document.getElementById('lightbox-title').textContent = item.title;
+            document.getElementById('lightbox-desc').textContent = item.description;
+            document.getElementById('lightbox-photographer').textContent = item.photographer;
+            document.getElementById('lightbox-date').textContent = item.date;
+        }
+
+        // Keyboard Navigation for Lightbox
+        document.addEventListener('keydown', function(e) {
+            if (document.getElementById('lightbox').classList.contains('active')) {
+                if (e.key === 'Escape') {
+                    closeLightbox(e);
+                } else if (e.key === 'ArrowLeft') {
+                    changeImage(-1, e);
+                } else if (e.key === 'ArrowRight') {
+                    changeImage(1, e);
+                }
+            }
+        });
+
+        // Scroll Reveal Animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(element => {
+            observer.observe(element);
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+
+        // Add loading animation for images
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('img');
+            
+            images.forEach(img => {
+                // Remove loading class once image is loaded
+                img.addEventListener('load', function() {
+                    this.style.opacity = 1;
+                    this.parentElement.classList.remove('loading');
+                });
+                
+                // Set initial opacity for fade-in effect
+                img.style.opacity = 0;
+                img.style.transition = 'opacity 0.5s ease';
+                
+                // Add loading class to parent
+                img.parentElement.classList.add('loading');
+            });
+        });
+
+        // Console welcome message
+        console.log('%c🎬 NEESORGO - Visual Gallery 📸', 
+            'font-size: 20px; font-weight: bold; color: #FF6B35;');
+        console.log('%cWhere Every Frame Tells a Story', 
+            'font-size: 14px; color: #FFD166;');
+    </script>
+</body>
+</html>
