@@ -38,6 +38,10 @@
             font-weight: 700;
             line-height: 1.2;
         }
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
 
         .container {
             max-width: 1200px;
@@ -208,7 +212,7 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(rgba(10, 10, 10, 0.8), rgba(10, 10, 10, 0.9)), 
-                        url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1630&q=80');
+                        url('pictures/cover.jpg') no-repeat center center/cover;
             background-size: cover;
             background-position: center;
             z-index: -1;
@@ -407,8 +411,10 @@
         }
 
         .member-image img {
-            width: 100%;
+            width: 70%;
             height: 100%;
+            padding-top: 5px;
+            border-radius: 10px;
             object-fit: cover;
             transition: var(--transition);
         }
@@ -691,7 +697,14 @@
         .fade-in.visible {
             opacity: 1;
             transform: translateY(0);
+
         }
+        .btn-wrapper {
+            display: flex;
+            justify-content: center; /* horizontal centering */
+            align-items: center;   
+            margin-top: 10px;  /* vertical centering if needed */
+            }
 
         /* Responsive Styles */
         @media (max-width: 992px) {
@@ -778,20 +791,21 @@
             }
         }
         
+        
     </style>
 </head>
 <body>
     <!-- Header -->
     <header id="header">
         <div class="container header-container">
-            <a href="#" class="logo"><img src="logo.png" width="70px"></i> NEESORGO</a>
+            <a href="#" class="logo"><img src="logowhite.png" width="60px"></i> NEESORGO</a>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
+                <li><a href="about.html">About</a></li>
                 <li><a href="#gallery">Gallery</a></li>
-                <li><a href="#team">Team</a></li>
-                <li><a href="#events">Events</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="members.html">Team</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="contact.html">Contact</a></li>
             </ul>
             <div class="mobile-menu"><i class="fas fa-bars"></i></div>
         </div>
@@ -829,25 +843,28 @@
                     <div class="about-stats">
                         <div class="stat">
                             <i class="fas fa-camera"></i>
-                            <h4>500+</h4>
+                            <h4>200+</h4>
                             <p>Photos Captured</p>
                         </div>
                         <div class="stat">
                             <i class="fas fa-film"></i>
-                            <h4>50+</h4>
+                            <h4>10+</h4>
                             <p>Short Films</p>
                         </div>
                         <div class="stat">
                             <i class="fas fa-users"></i>
-                            <h4>100+</h4>
+                            <h4>40+</h4>
                             <p>Active Members</p>
                         </div>
                     </div>
                 </div>
                 <div class="about-image fade-in">
-                    <img src="https://images.unsplash.com/photo-1554048612-b6a482bc67e5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Photography Team">
+                    <img src="pictures/Wildlife.jpg" alt="Photography Team">
                 </div>
             </div>
+             <div class="btn-wrapper">
+  <a href="about.html" class="btn">See More</a>
+</div> 
         </div>
     </section>
 
@@ -860,37 +877,37 @@
             </div>
             <div class="gallery-grid">
                 <div class="gallery-item fade-in" onclick="openLightbox('📸')">
-                    <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Campus Moments">
+                    <img src="pictures/bird.JPG" alt="Campus Moments">
                     <div class="gallery-overlay">
                         <h3>Campus Life</h3>
                     </div>
                 </div>
                 <div class="gallery-item fade-in" onclick="openLightbox('🎬')">
-                    <img src="https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1476&q=80" alt="Short Films">
+                    <img src="pictures/boat.jpg" alt="Short Films">
                     <div class="gallery-overlay">
                         <h3>Short Films</h3>
                     </div>
                 </div>
                 <div class="gallery-item fade-in" onclick="openLightbox('🌟')">
-                    <img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Events">
+                    <img src="pictures/cycle.jpg" alt="Events">
                     <div class="gallery-overlay">
                         <h3>College Events</h3>
                     </div>
                 </div>
                 <div class="gallery-item fade-in" onclick="openLightbox('🎨')">
-                    <img src="https://images.unsplash.com/photo-1554080353-a576cf803bda?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1434&q=80" alt="Creative Shots">
+                    <img src="pictures/goledn.jpg" alt="Creative Shots">
                     <div class="gallery-overlay">
                         <h3>Creative Photography</h3>
                     </div>
                 </div>
                 <div class="gallery-item fade-in" onclick="openLightbox('📽️')">
-                    <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1459&q=80" alt="Behind the Scenes">
+                    <img src="pictures/sun.jpg" alt="Behind the Scenes">
                     <div class="gallery-overlay">
                         <h3>Behind The Scenes</h3>
                     </div>
                 </div>
                 <div class="gallery-item fade-in" onclick="openLightbox('✨')">
-                    <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1630&q=80" alt="Special Moments">
+                    <img src="pictures/tree.jpg" alt="Special Moments">
                     <div class="gallery-overlay">
                         <h3>Special Moments</h3>
                     </div>
@@ -919,11 +936,11 @@
                 </div>
                 <div class="team-member fade-in">
                     <div class="member-image">
-                        <img src="rakib.jpg" width="200px" alt="Vice President">
+                        <img src="rakib.jpg" alt="Vice President">
                     </div>
                     <div class="member-info">
                         <h3>Rakibul Islam Rakib</h3>
-                        <p class="role">General Secreatary</p>
+                        <p class="role">General Secratery</p>
                         <p class="tagline">"Bringing ideas to life"</p>
                     </div>
                 </div>
@@ -936,19 +953,13 @@
                         <p class="role">Chief Photographer</p>
                         <p class="tagline">"Capturing moments that matter"</p>
                     </div>
-                </div>
-                <div class="team-member fade-in">
-                    <div class="member-image">
-                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Film Director">
-                    </div>
-                    <div class="member-info">
-                        <h3>Emma Davis</h3>
-                        <p class="role">Film Director</p>
-                        <p class="tagline">"Crafting compelling narratives"</p>
-                    </div>
-                </div>
+                </div>  
             </div>
+            <div class="btn-wrapper">
+  <a href="members.html" class="btn">See More</a>
+</div>  
         </div>
+        
     </section>
 
     <!-- Events Section -->
